@@ -1,9 +1,7 @@
 <section class="py-4 bg-background border-b border-border">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" x-data="{ mobileMenuOpen: false }">
-        <!-- Desktop Menu -->
         <nav class="hidden items-center justify-between lg:flex">
             <div class="flex items-center gap-6">
-                <!-- Logo -->
                 <a href="{{ route('dashboard') }}" class="flex items-center gap-2">
                     <x-application-logo class="w-8 h-8 fill-current text-foreground" />
                     <span class="text-md font-semibold tracking-tighter text-foreground">
@@ -11,16 +9,13 @@
                     </span>
                 </a>
 
-                <!-- Navigation Menu -->
                 <div class="flex items-center">
                     <div class="flex flex-row gap-1">
-                        <!-- Dashboard Link -->
                         <a href="{{ route('dashboard') }}" class="group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground disabled:pointer-events-none disabled:opacity-50 {{ request()->routeIs('dashboard') ? 'bg-accent/50 text-accent-foreground' : 'bg-background' }}">
                             <x-heroicon-o-squares-2x2 class="mr-2 h-4 w-4" />
                             Dashboard
                         </a>
 
-                        <!-- Sales Dropdown -->
                         <x-nav-dropdown active="{{ request()->routeIs(['sales.*', 'customers.*']) }}">
                             <x-slot name="icon">
                                 <x-heroicon-o-banknotes class="mr-2 h-4 w-4" />
@@ -41,7 +36,6 @@
                             </x-slot>
                         </x-nav-dropdown>
 
-                        <!-- Purchases Dropdown -->
                         <x-nav-dropdown active="{{ request()->routeIs(['purchases.*', 'suppliers.*']) }}">
                             <x-slot name="icon">
                                 <x-heroicon-o-shopping-cart class="mr-2 h-4 w-4" />
@@ -59,7 +53,7 @@
                             </x-slot>
                         </x-nav-dropdown>
 
-                        <!-- Finance Dropdown -->
+                        {{-- MENU FINANCE DIMATIKAN SEMENTARA SESUAI REVISI DOSEN
                         <x-nav-dropdown active="{{ request()->routeIs(['finance.*']) }}">
                             <x-slot name="icon">
                                 <x-heroicon-o-currency-dollar class="mr-2 h-4 w-4" />
@@ -76,14 +70,13 @@
                                 </x-dropdown-link>
                             </x-slot>
                         </x-nav-dropdown>
+                        --}}
 
-                        <!-- Users Link -->
                         <a href="{{ route('users.index') }}" class="group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground disabled:pointer-events-none disabled:opacity-50 {{ request()->routeIs('users.*') ? 'bg-accent/50 text-accent-foreground' : 'bg-background' }}">
                             <x-heroicon-o-users class="mr-2 h-4 w-4" />
                             Users
                         </a>
 
-                        <!-- Products Dropdown -->
                         <x-nav-dropdown active="{{ request()->routeIs(['products.*', 'categories.*', 'units.*']) }}">
                             <x-slot name="icon">
                                 <x-heroicon-o-cube class="mr-2 h-4 w-4" />
@@ -107,7 +100,6 @@
                 </div>
             </div>
 
-            <!-- User Auth Buttons -->
             <div class="flex gap-2">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -126,7 +118,6 @@
                             {{ __('Settings') }}
                         </x-dropdown-link>
 
-                        <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
@@ -141,10 +132,8 @@
             </div>
         </nav>
 
-        <!-- Mobile Menu -->
         <div class="block lg:hidden">
             <div class="flex items-center justify-between">
-                <!-- Logo -->
                 <a href="{{ route('dashboard') }}" class="flex items-center gap-2">
                     <x-application-logo class="w-8 h-8 fill-current text-foreground" />
                 </a>
@@ -154,7 +143,6 @@
                 </button>
             </div>
 
-            <!-- Mobile Sheet/Drawer -->
             <div x-show="mobileMenuOpen"
                 x-transition:enter="duration-300 ease-out"
                 x-transition:enter-start="opacity-0"
@@ -193,7 +181,6 @@
                     <div class="flex w-full flex-col gap-4">
                         <a href="{{ route('dashboard') }}" class="text-md font-semibold hover:underline {{ request()->routeIs('dashboard') ? 'text-primary' : '' }}">Dashboard</a>
 
-                        <!-- Mobile Sales Accordion -->
                         <div x-data="{ expanded: {{ request()->routeIs(['sales.*', 'customers.*']) ? 'true' : 'false' }} }" class="border-b-0">
                             <button @click="expanded = !expanded" class="flex flex-1 items-center justify-between py-0 font-semibold transition-all hover:underline [&[data-state=open]>svg]:rotate-180 w-full text-left text-md {{ request()->routeIs(['sales.*', 'customers.*']) ? 'text-primary' : '' }}">
                                 Sales
@@ -208,7 +195,6 @@
                             </div>
                         </div>
 
-                        <!-- Mobile Purchases Accordion -->
                         <div x-data="{ expanded: {{ request()->routeIs(['purchases.*', 'suppliers.*']) ? 'true' : 'false' }} }" class="border-b-0">
                             <button @click="expanded = !expanded" class="flex flex-1 items-center justify-between py-0 font-semibold transition-all hover:underline [&[data-state=open]>svg]:rotate-180 w-full text-left text-md {{ request()->routeIs(['purchases.*', 'suppliers.*']) ? 'text-primary' : '' }}">
                                 Purchases
@@ -222,7 +208,7 @@
                             </div>
                         </div>
 
-                        <!-- Mobile Finance Accordion -->
+                        {{-- MENU FINANCE MOBILE DIMATIKAN SEMENTARA
                         <div x-data="{ expanded: {{ request()->routeIs(['finance.*']) ? 'true' : 'false' }} }" class="border-b-0">
                             <button @click="expanded = !expanded" class="flex flex-1 items-center justify-between py-0 font-semibold transition-all hover:underline [&[data-state=open]>svg]:rotate-180 w-full text-left text-md {{ request()->routeIs(['finance.*']) ? 'text-primary' : '' }}">
                                 Finance
@@ -235,11 +221,10 @@
                                 </div>
                             </div>
                         </div>
+                        --}}
 
-                        <!-- Mobile Users Link -->
                         <a href="{{ route('users.index') }}" class="text-md font-semibold hover:underline border-b pb-4 {{ request()->routeIs('users.*') ? 'text-primary' : '' }}">Users</a>
 
-                        <!-- Mobile Products Accordion -->
                         <div x-data="{ expanded: {{ request()->routeIs(['products.*', 'categories.*', 'units.*']) ? 'true' : 'false' }} }" class="border-b-0">
                             <button @click="expanded = !expanded" class="flex flex-1 items-center justify-between py-0 font-semibold transition-all hover:underline [&[data-state=open]>svg]:rotate-180 w-full text-left text-md {{ request()->routeIs(['products.*', 'categories.*', 'units.*']) ? 'text-primary' : '' }}">
                                 Products
@@ -255,8 +240,7 @@
                         </div>
 
 
-                    <!-- Mobile User Menu -->
-                        <div class="pt-4 mt-4 border-t border-border">
+                    <div class="pt-4 mt-4 border-t border-border">
                             <div class="font-medium text-base text-foreground mb-2">{{ Auth::user()->name }}</div>
                             <div class="flex flex-col gap-3">
                                 <a href="{{ route('profile.index') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input h-9 px-4 py-2 w-full {{ request()->routeIs('profile.*') ? 'bg-accent text-accent-foreground' : 'bg-background hover:bg-accent hover:text-accent-foreground' }}">
